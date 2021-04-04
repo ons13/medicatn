@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "52865330542",
+    "project_id": "medicatnflutter",
+    "storage_bucket": "medicatnflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52865330542:android:bcd6fe157f4f369893257f",
+        "android_client_info": {
+          "package_name": "com.example.medicatn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52865330542-g6vjptisgnl8q2ppeuop224n016qtgng.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medicatn",
+            "certificate_hash": "bf44ef257911f535c685409fbdc64705059547e1"
+          }
+        },
+        {
+          "client_id": "52865330542-4ae0m1909tr3jco5f429cqjmqlgjebks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE-KMUq0ZIOkore012dHzAvMpOM2SZ2Xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52865330542-4ae0m1909tr3jco5f429cqjmqlgjebks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
