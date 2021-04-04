@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/ASUS/AndroidStudioProjects/medicatn/lib/TabBar2/Details.dart';
+
+import '../TabBar2/Details.dart';
 import '../list_of_data.dart';
 import 'navbar_key.dart';
 import 'favorisScreen.dart';
