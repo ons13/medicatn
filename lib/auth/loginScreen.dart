@@ -109,7 +109,7 @@ class LoginScreen extends StatelessWidget {
                           displayToastMessage("password is mandatory", context);
                         }
                         else {
-                          loginAndAuthenticateUser(context);
+                          login(context, emailTextEditingController.text, passwordTextEditingController.text);
                         }
                       },
 
@@ -141,6 +141,7 @@ class LoginScreen extends StatelessWidget {
 
   }
   final FirebaseAuth _firebaseAuth=FirebaseAuth.instance;
+  // This method is not working properly, you can fix it or use mine
   void loginAndAuthenticateUser(BuildContext context)async
   {
     final User user = (await _firebaseAuth
@@ -169,6 +170,33 @@ class LoginScreen extends StatelessWidget {
     else {
       //error
       displayToastMessage("error occured,", context);
+    }
+  }
+
+  /*
+  * This function serves the purpose of logging in using Firebase Authentication with username and password
+  * If you want to change or modify it to your needs feel free
+  */
+  void login(BuildContext context, String username, String pwd) async{
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: username,
+          password: pwd
+      );
+      if (userCredential.user != null)
+        {
+          Navigator.pushNamedAndRemoveUntil(
+              context, MainScreen.idScreen, (route) => false);
+          displayToastMessage("u re logged in now ", context);
+        }else{
+        displayToastMessage("error occured", context);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
     }
   }
   Widget signInButton(context) {
