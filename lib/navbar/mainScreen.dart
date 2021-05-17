@@ -1,8 +1,13 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
-import '../TabBar2/Details.dart';
-import '../list_of_data.dart';
+import 'package:medicatn/catScreens/meds_list.dart';
+import 'package:medicatn/core/constants/queries.dart';
+import 'package:medicatn/core/datasource/database_initializer.dart';
+import 'package:medicatn/core/locator.dart';
+import 'package:medicatn/core/models/medicament.dart';
+import 'package:medicatn/core/services/database_service.dart';
+import 'file:///C:/Users/ASUS/AndroidStudioProjects/medicatn/lib/TabBar2/Details.dart';
+//import '../list_of_data.dart';
 import 'navbar_key.dart';
 import 'favorisScreen.dart';
 import 'mapsScreen.dart';
@@ -51,9 +56,9 @@ class _MainScreenState extends State<MainScreen> {
         break;
       default: return new Container(
         child: new Center(
-          child : new Text (
-            'no page found by page chooser'
-          )
+            child : new Text (
+                'no page found by page chooser'
+            )
         ),
       );
     }
@@ -90,8 +95,8 @@ class _MainScreenState extends State<MainScreen> {
         animationCurve: Curves.easeInBack,
         animationDuration: const Duration(microseconds:300 ),
       ),
-        body: Container(  color: Color.fromRGBO(46, 112, 74, 1),
-         child:  _showPage,
+      body: Container(  color: Color.fromRGBO(46, 112, 74, 1),
+        child:  _showPage,
       ),
 
       appBar: AppBar(
@@ -101,8 +106,8 @@ class _MainScreenState extends State<MainScreen> {
         ),
         title: Text('Nom commercial,DCI',
           style: TextStyle( color: Colors.black,
-               fontFamily: "Brand-Regular",
-            fontSize:20),),
+              fontFamily: "Brand-Regular",
+              fontSize:20),),
         backgroundColor: Colors.white,
 
         actions: <Widget>[
@@ -121,10 +126,22 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 //tawa bch nekhdmou el db el class
-class MedicaItemsSearch extends SearchDelegate<MedicaItem>{
+class MedicaItemsSearch extends SearchDelegate<Medicament>{
+  DatabaseInitializer _databaseInitializer = locator<DatabaseInitializer>();
 
-
-
+  Future<List<Medicament>> getAllMedicaments(String criteria) async {
+    try {
+      var dbClient = await _databaseInitializer.db;
+      var res = await dbClient.rawQuery(allMedicaments + criteria + "';");
+      List<Medicament> list = res.isNotEmpty
+          ? res.map((c) => Medicament.fromMap(c))
+          : null;
+      return list;
+    } catch (e) {
+      print("[Database Service] getAllMeds $e");
+      return List.empty();
+    }
+  }
   @override
   List<Widget> buildActions(BuildContext context) {
     return [IconButton(icon: Icon(Icons.clear), onPressed:(){
@@ -136,51 +153,32 @@ class MedicaItemsSearch extends SearchDelegate<MedicaItem>{
 
   @override
   Widget buildLeading(BuildContext context) {
-     return IconButton(onPressed: (){
-       close(context, null);
+    return IconButton(onPressed: (){
+      close(context, null);
 
-       } , icon: Icon(Icons.arrow_back),);
+
+      } , icon: Icon(Icons.arrow_back),);
   }
 
   @override
   Widget buildResults(BuildContext context) {
     //bch nemchi page okhra
-  return DetailsPage();
+    return null;
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-  final mylist = query.isEmpty? loadMedicaItem()
-      :loadMedicaItem().where((p) => p.title.startsWith(query)).toList() ;
-  return mylist.isEmpty? Text('No Results Found...',
-    style: TextStyle(fontFamily:"Brand-Regular",fontSize:20 ),):
-   ListView.builder(
-      itemCount:mylist.length ,
-      itemBuilder: (context,i){
-        final MedicaItem listitem= mylist[i];
-        return ListTile(
+    final mylist = query.isEmpty? getAllMedicaments
+        :getAllMedicaments;
+   return ListView.builder(
+        itemBuilder: (context,i){
+          final Future<List<Medicament>> Function(String criteria) listitem= mylist   ;
+          return ListTile(
 
-          onTap: (){
-            showResults(context);
-          },
-          title:
-         Column(
-          crossAxisAlignment: CrossAxisAlignment.start ,
-          children: [
-            Text(listitem.title,style: TextStyle(
-                fontFamily: "Brand Bold",
-
-                fontSize:16),),
-            Text(listitem.category,style:TextStyle(
-              color: Color.fromRGBO(46, 112, 74, 1),
-              fontFamily: "Brand-Regular",
-                fontSize:20) ,),
-           Divider()
-          ],
-        ),);
-      });
+            onTap: (){
+              showResults(context);
+            });
+        });
   }
 
 }
-
-

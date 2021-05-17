@@ -7,6 +7,8 @@ class EffetIndPage extends StatefulWidget {
 class _EffetIndPageState extends State<EffetIndPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+        child: Text('jfjksdjkvsd')
+    );
   }
 }

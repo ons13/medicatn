@@ -10,17 +10,36 @@ class mapScreen extends StatefulWidget {
 class _mapScreenState extends State<mapScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: RaisedButton(
-          child: Text('waa '),
-          onPressed: (){
-            final CurvedNavigationBarState navState =NavbarKey.getkey().currentState;
-            navState.setPage(0);
-          },
-        ),
-      ),
+    return   Scaffold(
+      body: Center(
+          child:  Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.location_on,
+                size: 70.0,
+                color: Colors.green[800],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text("click here to access to a map where can you found all nearby medical stores",
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w100),
+              ),
+              SizedBox(height: 20.0,),
+              Text(""),
+              RaisedButton(onPressed: ()
+              {},
+              color: Colors.green[900],
+                child: Text("Get your map", style: TextStyle(color: Colors.white),),
+                )
 
-    );
+          ],
+
+          ),
+        ));
+
+
   }
 }

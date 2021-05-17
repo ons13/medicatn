@@ -193,6 +193,7 @@ class RegistrationScreen extends StatelessWidget {
   }}
 displayToastMessage(String message ,BuildContext context)
 {
+
   Fluttertoast.showToast(msg: message);
 
 }

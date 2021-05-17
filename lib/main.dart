@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:medicatn/auth/loginScreen.dart';
 
 import 'auth/RegistrationScreen.dart';
+import 'core/locator.dart';
 import 'navbar/mainScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  setupLocator();
   runApp(MyApp());
 }
 DatabaseReference usersRef =FirebaseDatabase.instance.reference().child("users");
