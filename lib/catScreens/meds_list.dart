@@ -63,7 +63,7 @@ class _MedsListState extends State<MedsList> {
         backgroundColor: Colors.white,
         body: FutureBuilder(
           future:
-          _databaseService.getAllMedicaments(this.widget.medicamentName),
+          _databaseService.getMedicamentsByName(this.widget.medicamentName),
           builder: (context, snapshot) {
             return snapshot.hasData && !snapshot.hasError
                 ? Container(

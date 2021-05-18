@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'dart:async';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 class DatabaseInitializer extends ChangeNotifier{
@@ -16,6 +17,9 @@ class DatabaseInitializer extends ChangeNotifier{
     }
     _db = await initDb();
     return _db;
+  }
+  void closeDatabase(){
+    _db.close();
   }
 
   DatabaseInitializer.internal();
