@@ -1,15 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/ASUS/AndroidStudioProjects/medicatn/lib/TabBar2/Details.dart';
 import 'package:medicatn/auth/loginScreen.dart';
 
 import 'auth/RegistrationScreen.dart';
+import 'core/locator.dart';
 import 'navbar/mainScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  setupLocator();
   runApp(MyApp());
 }
 DatabaseReference usersRef =FirebaseDatabase.instance.reference().child("users");

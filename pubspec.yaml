@@ -34,7 +34,11 @@ dependencies:
   google_sign_in: ^5.0.0
   fluttertoast: ^7.1.8
   curved_navigation_bar: ^0.3.7
-
+  provider: ^5.0.0
+  sqflite: ^2.0.0+3
+  get_it: ^6.0.0
+  path_provider: ^0.4.0
+  favorite_button: ^0.0.4
 
 dev_dependencies:
   flutter_test:
@@ -53,7 +57,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - images/
+    - images/
+    - data/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -67,15 +73,15 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: Signatra
-       fonts:
-         - asset: fonts/Signatra.ttf
-     - family: Brand-Regular
-       fonts:
-          - asset: fonts/bolt-regular.ttf
-     - family: Brand Bold
-       fonts:
-          - asset: fonts/bolt-semibold.ttf
+    - family: Signatra
+      fonts:
+        - asset: fonts/Signatra.ttf
+    - family: Brand-Regular
+      fonts:
+        - asset: fonts/bolt-regular.ttf
+    - family: Brand Bold
+      fonts:
+        - asset: fonts/bolt-semibold.ttf
   #      - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

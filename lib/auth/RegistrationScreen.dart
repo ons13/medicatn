@@ -16,8 +16,9 @@ class RegistrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor:Colors.grey ,
+    return
+      Scaffold(
+      backgroundColor:Colors.white ,
       body:Padding(
         padding:  EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -109,7 +110,7 @@ class RegistrationScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10.0,),
                     RaisedButton(
-                      color: Colors.green,
+                      color: Color.fromRGBO(46, 112, 74, 1),
                       textColor: Colors.white ,
                       child: Container(
                         height: 50.0,
@@ -193,6 +194,7 @@ class RegistrationScreen extends StatelessWidget {
   }}
 displayToastMessage(String message ,BuildContext context)
 {
+
   Fluttertoast.showToast(msg: message);
 
 }
