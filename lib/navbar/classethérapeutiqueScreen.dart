@@ -59,13 +59,13 @@ Widget build(BuildContext context) {
                                       isScrollControlled: true,
 
                                       builder: (context) =>
-                                          subCategoriesList(snapshot.data[index].dvs)),
+                                          subCategoriesList(snapshot.data[index].classeveic)),
 
                                     child:  Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Image.asset(images[index]),
-                                        Text(snapshot.data[index].dvs,  style:TextStyle(
+                                        Text(snapshot.data[index].classeveic,  style:TextStyle(
                                           fontWeight: FontWeight.bold,fontFamily: 'Brand Bold',fontSize: 11),
                                 ),
 

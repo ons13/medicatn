@@ -15,7 +15,7 @@ class DatabaseService {
       List<Medicament> list = res.isNotEmpty
           ? res.map((c) => Medicament.fromMap(c)).toList()
           : List.empty();
-      dbClient.close();
+
       return list.toSet().toList();
     } catch (e) {
       print("[Database Service] getAllMedsCategories $e");
@@ -30,7 +30,7 @@ class DatabaseService {
       List<Medicament> list = res.isNotEmpty
           ? res.map((c) => Medicament.fromMap(c)).toList()
           : List.empty();
-      dbClient.close();
+
       return list.toSet().toList();
     } catch (e) {
       print("[Database Service] getAllsubCategories $e");
@@ -38,13 +38,14 @@ class DatabaseService {
     }
   }
 
-  Future<List<Medicament>> getMedicamentsByName(String criteria) async {
+  Future<List<Medicament>> getAllMedicaments(String criteria) async {
     try {
       var dbClient = await _databaseInitializer.db;
       var res = await dbClient.rawQuery(allMedicaments + criteria + "';");
       List<Medicament> list = res.isNotEmpty
           ? res.map((c) => Medicament.fromMap(c)).toList()
           : null;
+
       return list;
     } catch (e) {
       print("[Database Service] getAllMeds $e");
@@ -52,3 +53,4 @@ class DatabaseService {
     }
   }
 }
+
