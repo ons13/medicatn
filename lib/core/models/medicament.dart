@@ -18,7 +18,7 @@ class Medicament {
   String AMM; // date
   String DateAMM; // code
 
-  String get CatName => subCategory;
+  String get catName => subCategory;
   String get medName => name;
 
 

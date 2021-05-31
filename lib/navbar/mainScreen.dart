@@ -22,7 +22,15 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 class _MainScreenState extends State<MainScreen> {
+<<<<<<< Updated upstream
   int pageIndex =0;
+=======
+  int pageIndex = 0;
+
+  List<Medicament> allDrugs = List.empty();
+  DatabaseService dbService;
+
+>>>>>>> Stashed changes
 //create all the pages
   final newsinfo _newinfo =newsinfo();
   final classetherapeutique _classetherapeutique =classetherapeutique();
@@ -61,8 +69,24 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
+<<<<<<< Updated upstream
 
   // final screen =[newsinfo(),classetherapeutique(), favScreen(),constantebio(),mapScreen(),aproposScreen()];
+=======
+  @override
+  void initState() {
+    //we needed to get all drugs from the start, so we used initState method
+    prepareDrugsForSearch();
+  }
+
+  void prepareDrugsForSearch() async {
+    dbService = locator<DatabaseService>();
+
+    //You'll receive 20 items in this call because it's limited by the query
+    //When we ask for all items, it bugs the app so we needed to limit the number of items
+    allDrugs = await dbService.getDrugs();
+  }
+>>>>>>> Stashed changes
 
 
   @override
@@ -113,8 +137,13 @@ class _MainScreenState extends State<MainScreen> {
               color: Colors.black,
               onPressed: () {
                 //bch nediw aalih lenaa
+<<<<<<< Updated upstream
                 showSearch(context: context, delegate: MedicaItemsSearch());
 
+=======
+                showSearch(
+                    context: context, delegate: MedicaItemsSearch(allDrugs));
+>>>>>>> Stashed changes
               })
         ],
       ),
@@ -122,9 +151,20 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
+<<<<<<< Updated upstream
 //Future<List<Medicament>> MedicaItemsSearch () async
 //taw bch nekhdmou el db el class
 class MedicaItemsSearch extends SearchDelegate<Medicament> {
+=======
+
+//tawa bch nekhdmou el db el class
+class MedicaItemsSearch extends SearchDelegate<Medicament> {
+  //this attribute is for retrieving the allDrugs from Widget when initState is called
+  final List<Medicament> allDrugs;
+
+  MedicaItemsSearch(this.allDrugs);
+
+>>>>>>> Stashed changes
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -152,8 +192,8 @@ class MedicaItemsSearch extends SearchDelegate<Medicament> {
   }
   @override
   Widget buildSuggestions(BuildContext context) {
-    final dbService = locator<DatabaseService>();
     return FutureBuilder(
+<<<<<<< Updated upstream
       future: dbService.getAllMedicaments(query),
       builder: (context, snapshot) {
         return snapshot.hasData && snapshot.error != null
@@ -171,6 +211,35 @@ class MedicaItemsSearch extends SearchDelegate<Medicament> {
                       snapshot.data[i].name,
                       style:
                       TextStyle(fontFamily: "Brand Bold", fontSize: 16),
+=======
+      future: getDrugsByName(allDrugs, query),
+      builder: (context, snapshot) {
+        return snapshot.hasData && snapshot.error == null
+            ? ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, i) {
+                  return ListTile(
+                    onTap: () {
+                      showResults(context);
+                    },
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          snapshot.data[i].medName,
+                          style:
+                              TextStyle(fontFamily: "Brand Bold", fontSize: 16),
+                        ),
+                        Text(
+                          snapshot.data[i].category,
+                          style: TextStyle(
+                              color: Color.fromRGBO(46, 112, 74, 1),
+                              fontFamily: "Brand-Regular",
+                              fontSize: 20),
+                        ),
+                        Divider()
+                      ],
+>>>>>>> Stashed changes
                     ),
                     Text(
                       snapshot.data[i].presentation,
@@ -193,6 +262,7 @@ class MedicaItemsSearch extends SearchDelegate<Medicament> {
   }
 
 
+<<<<<<< Updated upstream
  /* @override
   List<Widget> buildActions(BuildContext context) {
     return [IconButton(icon: Icon(Icons.clear), onPressed:(){
@@ -250,3 +320,17 @@ class MedicaItemsSearch extends SearchDelegate<Medicament> {
   }
 
 
+=======
+  //This function serves the purpose of returning a list based on a key word written in the search bar
+  Future<List<Medicament>> getDrugsByName(
+      List<Medicament> allItems, String query) async {
+    final list = query.isEmpty
+        ? allItems
+        : allItems
+            .where((element) => element.medName.contains(query.toUpperCase()))
+            .toList();
+
+    return list;
+  }
+}
+>>>>>>> Stashed changes

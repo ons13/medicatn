@@ -52,5 +52,19 @@ class DatabaseService {
       return List.empty();
     }
   }
+
+  Future<List<Medicament>> getDrugs() async {
+    try {
+      var dbClient = await _databaseInitializer.db;
+      var res = await dbClient.rawQuery(getAllDrugs);
+      List<Medicament> list = res.isNotEmpty
+          ? res.map((c) => Medicament.fromMap(c)).toList()
+          : null;
+      return list;
+    } catch (e) {
+      print("[Database Service] getAllDrugs $e");
+      return List.empty();
+    }
+  }
 }
 
