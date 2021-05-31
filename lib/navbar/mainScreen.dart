@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:medicatn/core/locator.dart';
 import 'package:medicatn/core/models/medicament.dart';
 import 'package:medicatn/core/services/database_service.dart';
-import 'package:sqflite/sqflite.dart';
-import '../list_of_data.dart';
-import 'navbar_key.dart';
-import 'favorisScreen.dart';
-import 'mapsScreen.dart';
-import 'constantebioScreen.dart';
-import 'newsinfoScreen.dart';
 import 'aproposScreen.dart';
 import 'classethérapeutiqueScreen.dart';
+import 'constantebioScreen.dart';
+import 'favorisScreen.dart';
+import 'mapsScreen.dart';
+import 'navbar_key.dart';
+import 'newsinfoScreen.dart';
 
 class MainScreen extends StatefulWidget {
   static const String idScreen = "mainscreen";
@@ -139,8 +137,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-//Future<List<Medicament>> MedicaItemsSearch () async
-//taw bch nekhdmou el db el class
 
 //tawa bch nekhdmou el db el class
 class MedicaItemsSearch extends SearchDelegate<Medicament> {
