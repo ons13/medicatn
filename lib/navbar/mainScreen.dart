@@ -149,6 +149,7 @@ class MedicaItemsSearch extends SearchDelegate<MedicaItem>{
 
   @override
   Widget buildSuggestions(BuildContext context) {
+<<<<<<< Updated upstream
   final mylist = query.isEmpty? loadMedicaItem()
       :loadMedicaItem().where((p) => p.title.startsWith(query)).toList() ;
   return mylist.isEmpty? Text('No Results Found...',
@@ -178,6 +179,46 @@ class MedicaItemsSearch extends SearchDelegate<MedicaItem>{
           ],
         ),);
       });
+=======
+    final dbService = locator<DatabaseService>();
+    return FutureBuilder(
+      future: dbService.getMedicamentsByName(query),
+      builder: (context, snapshot) {
+        return snapshot.hasData && snapshot.error == null
+            ?  ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, i) {
+                  return ListTile(
+                    onTap: () {
+                      showResults(context);
+                    },
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          snapshot.data[i].name,
+                          style:
+                              TextStyle(fontFamily: "Brand Bold", fontSize: 16),
+                        ),
+                        Text(
+                          snapshot.data[i].category,
+                          style: TextStyle(
+                              color: Color.fromRGBO(46, 112, 74, 1),
+                              fontFamily: "Brand-Regular",
+                              fontSize: 20),
+                        ),
+                        Divider()
+                      ],
+                    ),
+                  );
+                })
+            : Text(
+                'No Results Found...',
+                style: TextStyle(fontFamily: "Brand-Regular", fontSize: 20),
+              );
+      },
+    );
+>>>>>>> Stashed changes
   }
 
 }

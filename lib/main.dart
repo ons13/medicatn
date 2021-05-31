@@ -3,12 +3,17 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'file:///C:/Users/ASUS/AndroidStudioProjects/medicatn/lib/TabBar2/Details.dart';
 import 'package:medicatn/auth/loginScreen.dart';
+import 'package:medicatn/core/constants/const.dart';
+import 'package:okito/okito.dart';
 
 import 'auth/RegistrationScreen.dart';
 import 'navbar/mainScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //Initializing Local Storage
+  await OkitoStorage.init(storageName: LOCAL_STORAGE);
+
   await Firebase.initializeApp();
   runApp(MyApp());
 }
